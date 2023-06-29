@@ -20,6 +20,7 @@ import com.example.submissionfundaawal.model.MainViewModel
 import com.example.submissionfundaawal.model.UserData
 import com.example.submissionfundaawal.detail.DetailUser
 import com.example.submissionfundaawal.detail.favorite.FavFactory
+import com.example.submissionfundaawal.nighttheme.NightThemeActivity
 
 class MainActivity : AppCompatActivity() {
     private  var _binding: ActivityMainBinding? = null
@@ -117,6 +118,10 @@ class MainActivity : AppCompatActivity() {
                         return false
                     }
                 })
+            }
+            R.id.themes -> {
+                val intent = Intent(this, NightThemeActivity::class.java)
+                startActivity(intent)
             }
             R.id.favorites -> {
                 startActivity(Intent(this, FavoriteActivity::class.java))
