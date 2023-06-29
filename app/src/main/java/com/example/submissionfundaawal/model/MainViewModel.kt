@@ -1,15 +1,18 @@
 package com.example.submissionfundaawal.model
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.submissionfundaawal.api.ApiConfig
+import com.example.submissionfundaawal.detail.favorite.FavEntity
+import com.example.submissionfundaawal.detail.favorite.FavRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : ViewModel() {
     companion object {
         private const val TAG = "MainViewModel"
         private const val DUMMY = "dicoding"
@@ -22,16 +25,16 @@ class MainViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     private val _searchUserDatas = MutableLiveData<List<ItemsItem>>()
-    val serachUser: LiveData<List<ItemsItem>> = _searchUserDatas
+    private val searchUser: LiveData<List<ItemsItem>> = _searchUserDatas
 
     private val _getDetaillUser = MutableLiveData<Detailusers>()
     val detailUser: LiveData<Detailusers> = _getDetaillUser
 
     private val _getUserFollowers = MutableLiveData<List<Follows>>()
-    val userFollowers: LiveData<List<Follows>> = _getUserFollowers
+    private val userFollowers: LiveData<List<Follows>> = _getUserFollowers
 
     private val _getUserFollowing = MutableLiveData<List<Follows>>()
-    val userFollowing: LiveData<List<Follows>> = _getUserFollowing
+    private val userFollowing: LiveData<List<Follows>> = _getUserFollowing
 
     init {
         findAllUser()
@@ -82,8 +85,7 @@ class MainViewModel : ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
-
-        return serachUser
+        return searchUser
     }
 
 
@@ -164,5 +166,13 @@ class MainViewModel : ViewModel() {
             }
         })
         return userFollowing
+    }
+    private val FavRepo = FavRepository(application)
+    fun getAllFavs(): LiveData<List<FavEntity>> = FavRepo.getAllFavorites()
+    fun insert(user: FavEntity) {
+        FavRepo.insert(user)
+    }
+    fun delete(id: Int) {
+        FavRepo.delete(id)
     }
 }

@@ -7,4 +7,6 @@
     <string name="search">Search</string>
     <string name="str_followers">Followers</string>
     <string name="str_following">Following</string>
+    <string name="favorite">Favorite</string>
+    <string name="setting">Setting</string>
 </resources>

@@ -71,24 +71,30 @@ data class ItemsItem(
 	val nodeId: String,
 
 	@field:SerializedName("organizations_url")
-	val organizationsUrl: String
-)
-
-data class Detailusers(
-	@field:SerializedName("login")
-	val login: String,
+	val organizationsUrl: String,
 
 	@field:SerializedName("name")
 	val name: String,
+)
+
+data class Detailusers(
+	@field:SerializedName("id")
+	val id: Int = 0,
+
+	@field:SerializedName("login")
+	val login: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
 
 	@field:SerializedName("avatar_url")
-	val avatarUrl: String,
+	val avatarUrl: String? = null,
 
 	@field:SerializedName("followers")
-	val followers: String,
+	val followers: String? = null,
 
 	@field:SerializedName("following")
-	val following: String,
+	val following: String? = null,
 )
 
 data class Follows(
